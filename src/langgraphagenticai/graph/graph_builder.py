@@ -3,6 +3,7 @@ from src.langgraphagenticai.state.state import State
 from src.langgraphagenticai.nodes.tool_bind_node import  ChatBotWithTools
 from langgraph.prebuilt import  tools_condition
 from src.langgraphagenticai.tools.search_tool import get_tools, create_tool_node
+from src.langgraphagenticai.nodes.basic_chatbot_node import BasicChatBotNode
 
 
 
@@ -11,17 +12,17 @@ class GraphBuilder:
         self.llm = model
         self.graph_builder = StateGraph(State)
 
-    # def basic_chatbot_build_graph(self):
-    #     """
-    #     Langgraph compilation for basic chat bot.
-    #     """
+    def basic_chatbot_build_graph(self):
+        """
+        Langgraph compilation for basic chat bot.
+        """
 
-    #     self.basic_chatbot_node = BasicChatBotNode(self.llm)
+        self.basic_chatbot_node = BasicChatBotNode(self.llm)
 
-    #     self.graph_builder.add_node("chatbot", self.basic_chatbot_node.process)
+        self.graph_builder.add_node("chatbot", self.basic_chatbot_node.process)
         
-    #     self.graph_builder.add_edge(START, "chatbot")
-    #     self.graph_builder.add_edge("chatbot", END)
+        self.graph_builder.add_edge(START, "chatbot")
+        self.graph_builder.add_edge("chatbot", END)
         
     def build_search_graph(self):
         """
